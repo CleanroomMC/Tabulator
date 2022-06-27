@@ -20,6 +20,7 @@ public class MinecraftMixin {
 
     @Inject(method = "populateSearchTreeManager", locals = LocalCapture.CAPTURE_FAILSOFT, at = @At(value = "INVOKE", target = "Lnet/minecraft/util/NonNullList;forEach(Ljava/util/function/Consumer;)V"))
     public void populateSearchTreeManager(CallbackInfo ci, SearchTree<ItemStack> searchtree, NonNullList<ItemStack> nonnulllist) {
-        nonnulllist.removeIf(item -> TabulatorAPI.shouldRemoveItem(CreativeTabs.SEARCH, item));
+        CreativeTabs creativeTabs = TabulatorAPI.getCreativeTab("search");
+        nonnulllist.removeIf(item -> TabulatorAPI.shouldRemoveItem(creativeTabs, item));
     }
 }

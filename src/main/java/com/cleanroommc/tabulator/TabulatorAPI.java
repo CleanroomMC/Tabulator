@@ -16,6 +16,7 @@ public class TabulatorAPI {
     public static final Set<CreativeTabs> removedTabs = new HashSet<>();
     private static final Set<ItemStack> removedItemsAll = new ObjectOpenCustomHashSet<>(Helper.ITEM_META_NBT_HASH_STRATEGY);
     private static final Map<CreativeTabs, Set<ItemStack>> removedItems = new HashMap<>();
+    private static int removedVanillaTabs = 0;
 
     @Nullable
     public static CreativeTabs getCreativeTab(String creativeTab) {
@@ -37,7 +38,7 @@ public class TabulatorAPI {
     }
 
     public static void removeTab(CreativeTabs creativeTab) {
-        if (creativeTab == null || creativeTab == CreativeTabs.INVENTORY) {
+        if (creativeTab == null || creativeTab == CreativeTabs.INVENTORY || creativeTab == CreativeTabs.SEARCH) {
             return;
         }
         int oldSize = CreativeTabs.CREATIVE_TAB_ARRAY.length;
@@ -45,6 +46,9 @@ public class TabulatorAPI {
         if (oldSize != CreativeTabs.CREATIVE_TAB_ARRAY.length) {
             removedTabs.add(creativeTab);
             Helper.assignCreativeTabIndexes();
+            if (((ModifiedCreativeTab) creativeTab).getOriginalIndex() < 12) {
+                removedVanillaTabs++;
+            }
         }
     }
 
@@ -65,5 +69,9 @@ public class TabulatorAPI {
         if (removedItemsAll.contains(item)) return true;
         Set<ItemStack> set = removedItems.get(creativeTab);
         return set != null && set.contains(item);
+    }
+
+    public static int getRemovedVanillaTabs() {
+        return removedVanillaTabs;
     }
 }
