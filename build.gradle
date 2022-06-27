@@ -1,5 +1,9 @@
 buildscript {
     repositories {
+		maven {
+			name = "forge"
+			url = "https://maven.minecraftforge.net/"
+		}
         maven { 
 			url = 'https://maven.cleanroommc.com' 
 		}
@@ -60,6 +64,10 @@ repositories {
     maven {
         url = 'https://repo.spongepowered.org/maven'
     }
+	maven {
+		name = "CurseForge"
+		url = 'https://www.cursemaven.com'
+	}
 }
 
 dependencies {
@@ -70,7 +78,7 @@ dependencies {
 	if (project.use_mixins.toBoolean()) {
 		deobfCompile 'zone.rong:mixinbooter:4.2'
     }
-	
+	compile 'curse.maven:crafttweaker-239197:3523955'
 }
 
 sourceSets {
@@ -110,6 +118,8 @@ jar {
 		if (project.use_mixins.toBoolean()) {
 			attribute_map['TweakClass'] = 'org.spongepowered.asm.launch.MixinTweaker'
 		}
+		// false for dev and true for non dev
+		attribute_map['ForceLoadAsMod'] = false
         attributes(attribute_map)
     }
 }
