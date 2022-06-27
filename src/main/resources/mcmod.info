@@ -1,13 +1,13 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "tabulator",
+  "name": "Tabulaor",
+  "description": "A mod that allows removing creative tabs and items",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["CleanroomMC"],
+  "authorList": ["brachy84","CleanroomMC"],
   "credits": "Authors of this project",
   "logoFile": "",
   "screenshots": [],
