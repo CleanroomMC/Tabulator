@@ -3,7 +3,10 @@ package com.cleanroommc.tabulator.common;
 import crafttweaker.CraftTweakerAPI;
 import it.unimi.dsi.fastutil.objects.ObjectOpenCustomHashSet;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nullable;
@@ -52,6 +55,16 @@ public class TabulatorAPI {
                 removedVanillaTabs++;
             }
             TabManager.markDirty();
+
+            NonNullList<ItemStack> items = NonNullList.create();
+            for (Item item : ForgeRegistries.ITEMS) {
+                if (item.getCreativeTab() != creativeTab) {
+                    item.getSubItems(creativeTab, items);
+                }
+            }
+            for (ItemStack item : items) {
+                removeItem(CreativeTabs.SEARCH, item);
+            }
         }
     }
 
@@ -69,7 +82,9 @@ public class TabulatorAPI {
     }
 
     public static boolean shouldRemoveItem(CreativeTabs creativeTab, ItemStack item) {
-        if (removedTabs.contains(creativeTab) || removedItemsAll.contains(item)) return true;
+        if (removedItemsAll.contains(item)) return true;
+        CreativeTabs tab = item.getItem().getCreativeTab();
+        if (tab != null && removedTabs.contains(tab)) return true;
         Set<ItemStack> set = removedItems.get(creativeTab);
         return set != null && set.contains(item);
     }

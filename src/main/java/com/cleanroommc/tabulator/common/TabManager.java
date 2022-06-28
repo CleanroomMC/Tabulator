@@ -1,6 +1,5 @@
 package com.cleanroommc.tabulator.common;
 
-import com.cleanroommc.tabulator.Tabulator;
 import net.minecraft.creativetab.CreativeTabs;
 
 import java.util.*;
