@@ -1,6 +1,6 @@
 package com.cleanroommc.tabulator.mixin;
 
-import com.cleanroommc.tabulator.TabulatorAPI;
+import com.cleanroommc.tabulator.common.TabulatorAPI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.SearchTree;
 import net.minecraft.creativetab.CreativeTabs;

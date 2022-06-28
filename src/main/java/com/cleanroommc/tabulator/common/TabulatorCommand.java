@@ -1,4 +1,4 @@
-package com.cleanroommc.tabulator;
+package com.cleanroommc.tabulator.common;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;

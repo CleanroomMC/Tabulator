@@ -1,5 +1,6 @@
 package com.cleanroommc.tabulator;
 
+import com.cleanroommc.tabulator.common.TabulatorCommand;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;

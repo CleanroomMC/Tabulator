@@ -1,4 +1,4 @@
-package com.cleanroommc.tabulator;
+package com.cleanroommc.tabulator.common;
 
 public interface ModifiedCreativeTab {
 

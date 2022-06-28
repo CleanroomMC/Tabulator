@@ -1,5 +1,6 @@
-package com.cleanroommc.tabulator;
+package com.cleanroommc.tabulator.integration;
 
+import com.cleanroommc.tabulator.common.TabulatorAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;

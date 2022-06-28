@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import zone.rong.mixinbooter.IEarlyMixinLoader;
-import zone.rong.mixinbooter.ILateMixinLoader;
 
 import javax.annotation.Nullable;
 import java.util.List;

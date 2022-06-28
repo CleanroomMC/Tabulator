@@ -1,5 +1,6 @@
-package com.cleanroommc.tabulator;
+package com.cleanroommc.tabulator.common;
 
+import crafttweaker.CraftTweakerAPI;
 import it.unimi.dsi.fastutil.objects.ObjectOpenCustomHashSet;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 public class TabulatorAPI {
 
-    public static final Set<CreativeTabs> removedTabs = new HashSet<>();
+    private static final Set<CreativeTabs> removedTabs = new HashSet<>();
     private static final Set<ItemStack> removedItemsAll = new ObjectOpenCustomHashSet<>(Helper.ITEM_META_NBT_HASH_STRATEGY);
     private static final Map<CreativeTabs, Set<ItemStack>> removedItems = new HashMap<>();
     private static int removedVanillaTabs = 0;
@@ -29,16 +30,17 @@ public class TabulatorAPI {
     }
 
     public static void removeTab(String creativeTab) {
-        for (CreativeTabs tabs : CreativeTabs.CREATIVE_TAB_ARRAY) {
-            if (tabs.getTabLabel().equals(creativeTab)) {
-                removeTab(tabs);
-                return;
-            }
+        CreativeTabs tab = getCreativeTab(creativeTab);
+        if (tab == null) {
+            CraftTweakerAPI.logError("Could not find creative tab with name " + creativeTab);
+        } else {
+            removeTab(tab);
         }
     }
 
     public static void removeTab(CreativeTabs creativeTab) {
-        if (creativeTab == null || creativeTab == CreativeTabs.INVENTORY || creativeTab == CreativeTabs.SEARCH) {
+        if (creativeTab == CreativeTabs.INVENTORY || creativeTab == CreativeTabs.SEARCH) {
+            CraftTweakerAPI.logError("Creative tabs 'search' and 'inventory' can not be removed!");
             return;
         }
         int oldSize = CreativeTabs.CREATIVE_TAB_ARRAY.length;
@@ -49,6 +51,7 @@ public class TabulatorAPI {
             if (((ModifiedCreativeTab) creativeTab).getOriginalIndex() < 12) {
                 removedVanillaTabs++;
             }
+            TabManager.markDirty();
         }
     }
 
@@ -66,7 +69,7 @@ public class TabulatorAPI {
     }
 
     public static boolean shouldRemoveItem(CreativeTabs creativeTab, ItemStack item) {
-        if (removedItemsAll.contains(item)) return true;
+        if (removedTabs.contains(creativeTab) || removedItemsAll.contains(item)) return true;
         Set<ItemStack> set = removedItems.get(creativeTab);
         return set != null && set.contains(item);
     }
