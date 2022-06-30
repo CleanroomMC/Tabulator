@@ -79,6 +79,7 @@ dependencies {
 		deobfCompile 'zone.rong:mixinbooter:4.2'
     }
 	compile 'curse.maven:crafttweaker-239197:3523955'
+	compile 'curse.maven:randomportals-308137:3136488'
 }
 
 sourceSets {

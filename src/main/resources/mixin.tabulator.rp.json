@@ -1,0 +1,10 @@
+{
+  "package": "com.cleanroommc.tabulator.mixin",
+  "refmap": "mixins.tabulator.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "CreativeTabsPortalsMixin"
+  ]
+}
