@@ -1,7 +1,6 @@
-package com.cleanroommc.tabulator.integration;
+package com.cleanroommc.tabulator.crafttweaker;
 
 import com.cleanroommc.tabulator.common.TabulatorAPI;
-import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
@@ -9,8 +8,13 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.tabulator.Tabs")
-@ZenRegister
 public class CTTabulatorAPI {
+
+    @ZenMethod
+    public static TabulatorCreativeTab create(String label, IItemStack icon) {
+        TabulatorCreativeTab tab = new TabulatorCreativeTab(label, CraftTweakerMC.getItemStack(icon));
+        return tab;
+    }
 
     /**
      * Removes a creative tab from the menu

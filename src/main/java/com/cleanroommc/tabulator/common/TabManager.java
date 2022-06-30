@@ -17,10 +17,10 @@ public class TabManager {
         modTabs.clear();
 
         for (CreativeTabs tab : CreativeTabs.CREATIVE_TAB_ARRAY) {
-            if (((ModifiedCreativeTab) tab).getOriginalIndex() > 11) {
-                modTabs.add(tab);
-            } else {
+            if (TabulatorAPI.isVanillaTab(tab)) {
                 vanillaTabs.add(tab);
+            } else {
+                modTabs.add(tab);
             }
         }
         vanillaTabs.sort(Comparator.comparingInt(CreativeTabs::getIndex));

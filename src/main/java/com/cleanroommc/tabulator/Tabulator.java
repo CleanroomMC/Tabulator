@@ -1,6 +1,11 @@
 package com.cleanroommc.tabulator;
 
 import com.cleanroommc.tabulator.common.TabulatorCommand;
+import com.cleanroommc.tabulator.crafttweaker.CTTabulatorAPI;
+import com.cleanroommc.tabulator.crafttweaker.TabulatorCreativeTab;
+import com.therandomlabs.randomportals.client.creativetab.CreativeTabPortals;
+import crafttweaker.CraftTweakerAPI;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -20,6 +25,11 @@ public class Tabulator {
 
     @Mod.EventHandler
     public void onPreInit(FMLPreInitializationEvent event) {
+        if (Loader.isModLoaded("randomportals")) {
+            String s = CreativeTabPortals.INSTANCE.getTabLabel();
+        }
+        CraftTweakerAPI.registerClass(CTTabulatorAPI.class);
+        CraftTweakerAPI.registerClass(TabulatorCreativeTab.class);
     }
 
     @Mod.EventHandler

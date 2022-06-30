@@ -1,5 +1,7 @@
 package com.cleanroommc.tabulator.common;
 
+import com.cleanroommc.tabulator.Tabulator;
+import com.cleanroommc.tabulator.crafttweaker.TabulatorCreativeTab;
 import crafttweaker.CraftTweakerAPI;
 import it.unimi.dsi.fastutil.objects.ObjectOpenCustomHashSet;
 import net.minecraft.creativetab.CreativeTabs;
@@ -51,7 +53,7 @@ public class TabulatorAPI {
         if (oldSize != CreativeTabs.CREATIVE_TAB_ARRAY.length) {
             removedTabs.add(creativeTab);
             Helper.assignCreativeTabIndexes();
-            if (((ModifiedCreativeTab) creativeTab).getOriginalIndex() < 12) {
+            if (isVanillaTab(creativeTab)) {
                 removedVanillaTabs++;
             }
             TabManager.markDirty();
@@ -65,6 +67,7 @@ public class TabulatorAPI {
             for (ItemStack item : items) {
                 removeItem(CreativeTabs.SEARCH, item);
             }
+            Tabulator.LOGGER.info("Removed tab {}", creativeTab.getTabLabel());
         }
     }
 
@@ -91,5 +94,9 @@ public class TabulatorAPI {
 
     public static int getRemovedVanillaTabs() {
         return removedVanillaTabs;
+    }
+
+    public static boolean isVanillaTab(CreativeTabs tab) {
+        return !(tab instanceof TabulatorCreativeTab) && ((ModifiedCreativeTab) tab).getOriginalIndex() < 12;
     }
 }

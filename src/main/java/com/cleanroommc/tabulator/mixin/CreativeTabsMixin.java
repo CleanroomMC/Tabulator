@@ -1,5 +1,6 @@
 package com.cleanroommc.tabulator.mixin;
 
+import com.cleanroommc.tabulator.Tabulator;
 import com.cleanroommc.tabulator.common.ModifiedCreativeTab;
 import com.cleanroommc.tabulator.common.TabManager;
 import com.cleanroommc.tabulator.common.TabulatorAPI;

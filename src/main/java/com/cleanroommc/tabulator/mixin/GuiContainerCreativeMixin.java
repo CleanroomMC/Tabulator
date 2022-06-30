@@ -1,5 +1,6 @@
 package com.cleanroommc.tabulator.mixin;
 
+import com.cleanroommc.tabulator.Tabulator;
 import com.cleanroommc.tabulator.common.TabManager;
 import com.cleanroommc.tabulator.common.TabulatorAPI;
 import net.minecraft.client.gui.GuiTextField;
@@ -9,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -35,6 +37,11 @@ public class GuiContainerCreativeMixin {
     @Redirect(method = "initGui", at = @At(value = "INVOKE", target = "Ljava/lang/Math;ceil(D)D"))
     public double initGui(double v) {
         return TabManager.getPageCount() - 1;
+    }
+
+    @ModifyVariable(method = "initGui", at = @At(value = "STORE"), ordinal = 1)
+    private int initGui2(int v) {
+        return TabManager.getPageCount() + 11;
     }
 
     /**
