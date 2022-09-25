@@ -9,6 +9,6 @@
   ],
   "client": [
     "GuiContainerCreativeMixin",
-    "MinecraftMixin"
+    "SearchTreeMixin"
   ]
 }
